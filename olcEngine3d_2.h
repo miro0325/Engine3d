@@ -1,17 +1,17 @@
 #pragma once
 
-class olcEngine3D : public Scene
+class olcEngine3D_2 : public Scene
 {
 public:
-	olcEngine3D();
-	
+	olcEngine3D_2();
+
 
 private:
 	mesh meshCube;
 	mat4x4 matProj;
 	float fTheta;
 
-	void MultiplyMatrixVector(vec3d &i, vec3d &o, mat4x4 &m);
+	void MultiplyMatrixVector(vec3d& i, vec3d& o, mat4x4& m);
 public:
 	bool OnUserCreate();
 

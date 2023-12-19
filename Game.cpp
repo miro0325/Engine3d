@@ -31,8 +31,10 @@ void Game::Init(HWND hWnd)
 	GET_SINGLETON(TimeManager)->Init();
 	//InputManager::GetInstance()->Init(hWnd);
 	GET_SINGLETON(InputManager)->Init(hWnd);
-	demo.OnUserCreate(_hdc);
-	
+	//GET_SINGLETON(SceneManager)->Init();
+	//GET_SINGLETON(SceneManager)->ChangeScene(SceneType::Engine3d);
+
+	demo.OnUserCreate();
 
 
 }
@@ -44,6 +46,9 @@ void Game::Update()
 	GET_SINGLETON(TimeManager)->Update();
 	//InputManager::GetInstance()->Update();
 	GET_SINGLETON(InputManager)->Update();
+	float deltaTime = GET_SINGLETON(TimeManager)->GetDeltaTime();
+
+	GET_SINGLETON(SceneManager)->Update(deltaTime);
 }
 
 void Game::Render() {
@@ -65,8 +70,13 @@ void Game::Render() {
 		wstring str = std::format(L"Mouse({0}, {1})", mousePos.x, mousePos.y);
 		::TextOut(_hdcBack, 20, 10, str.c_str(), static_cast<int32>(str.size()));
 	}
-	float deltaTime = GET_SINGLETON(TimeManager)->GetDeltaTime();
-	demo.OnUserUpdate(_hdcBack, deltaTime);
+
+	{
+		//GET_SINGLETON(SceneManager)->Render(_hdcBack);
+		float deltaTime = GET_SINGLETON(TimeManager)->GetDeltaTime();
+		demo.OnUserUpdate(_hdcBack, deltaTime);
+	}
+
 	::BitBlt(_hdc, 0, 0, _rect.right, _rect.bottom, _hdcBack, 0, 0, SRCCOPY);
 
 	::PatBlt(_hdcBack, 0, 0, _rect.right, _rect.bottom, WHITENESS);

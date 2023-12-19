@@ -1,26 +1,26 @@
 #include "framework.h"
-#include "olcEngine3D.h"
+#include "olcEngine3D_2.h"
 
 extern HWND g_hWnd;
 
-olcEngine3D::olcEngine3D() {
+olcEngine3D_2::olcEngine3D_2() {
 	OnUserCreate();
 }
 
-void olcEngine3D::Init() {
+void olcEngine3D_2::Init() {
 	OnUserCreate();
 }
 
-void olcEngine3D::Update(float deltaTime) {
+void olcEngine3D_2::Update(float deltaTime) {
 	this->deltaTime = deltaTime;
 }
 
-void olcEngine3D::Render(HDC hdc) {
+void olcEngine3D_2::Render(HDC hdc) {
 	//float deltaTime = GET_SINGLETON(TimeManager)->GetDeltaTime();
 	OnUserUpdate(hdc, deltaTime);
 }
 
-bool olcEngine3D::OnUserCreate() {
+bool olcEngine3D_2::OnUserCreate() {
 	meshCube.triangles = {
 		//SOUTH
 		{ 0.0f,0.0f,0.0f, 0.0f,1.0f,0.0f, 1.0f,1.0f,0.0f },
@@ -67,14 +67,14 @@ bool olcEngine3D::OnUserCreate() {
 	return true;
 }
 
-bool olcEngine3D::OnUserUpdate(HDC hdc, float elapsedTime) {
+bool olcEngine3D_2::OnUserUpdate(HDC hdc, float elapsedTime) {
 
 	RECT rtTemp;
 	GetClientRect(g_hWnd, &rtTemp);
 	int w = rtTemp.right - rtTemp.left;
 	int h = rtTemp.bottom - rtTemp.top;
 	float deltaTime = GET_SINGLETON(TimeManager)->GetDeltaTime();
-	mat4x4 matRotZ, matRotX; 
+	mat4x4 matRotZ, matRotX;
 	fTheta += 1.0f * deltaTime;
 
 	matRotZ.m[0][0] = cosf(fTheta);
@@ -92,7 +92,7 @@ bool olcEngine3D::OnUserUpdate(HDC hdc, float elapsedTime) {
 	matRotX.m[3][3] = 1;
 
 	for (auto tri : meshCube.triangles) {
-		triangle triProjected,triTranslated,triRotatedZ,triRotatedZX;
+		triangle triProjected, triTranslated, triRotatedZ, triRotatedZX;
 
 		MultiplyMatrixVector(tri.p[0], triRotatedZ.p[0], matRotZ);
 		MultiplyMatrixVector(tri.p[1], triRotatedZ.p[1], matRotZ);
@@ -122,32 +122,34 @@ bool olcEngine3D::OnUserUpdate(HDC hdc, float elapsedTime) {
 
 		float l = sqrtf(normal.x * normal.x + normal.y * normal.y + normal.z * normal.z);
 		normal.x /= l; normal.y /= l; normal.z /= l;
+		if (normal.z < 0) {
+			MultiplyMatrixVector(triTranslated.p[0], triProjected.p[0], matProj);
+			MultiplyMatrixVector(triTranslated.p[1], triProjected.p[1], matProj);
+			MultiplyMatrixVector(triTranslated.p[2], triProjected.p[2], matProj);
 
-		MultiplyMatrixVector(triTranslated.p[0], triProjected.p[0], matProj);
-		MultiplyMatrixVector(triTranslated.p[1], triProjected.p[1], matProj);
-		MultiplyMatrixVector(triTranslated.p[2], triProjected.p[2], matProj);
+			triProjected.p[0].x += 1.0f; triProjected.p[0].y += 1.0f;
+			triProjected.p[1].x += 1.0f; triProjected.p[1].y += 1.0f;
+			triProjected.p[2].x += 1.0f; triProjected.p[2].y += 1.0f;
 
-		triProjected.p[0].x += 1.0f; triProjected.p[0].y += 1.0f; 
-		triProjected.p[1].x += 1.0f; triProjected.p[1].y += 1.0f;
-		triProjected.p[2].x += 1.0f; triProjected.p[2].y += 1.0f;
+			triProjected.p[0].x *= 0.5f * (float)w;
+			triProjected.p[0].y *= 0.5f * (float)h;
+			triProjected.p[1].x *= 0.5f * (float)w;
+			triProjected.p[1].y *= 0.5f * (float)h;
+			triProjected.p[2].x *= 0.5f * (float)w;
+			triProjected.p[2].y *= 0.5f * (float)h;
 
-		triProjected.p[0].x *= 0.5f * (float)w;
-		triProjected.p[0].y *= 0.5f * (float)h;
-		triProjected.p[1].x *= 0.5f * (float)w;
-		triProjected.p[1].y *= 0.5f * (float)h;
-		triProjected.p[2].x *= 0.5f * (float)w;
-		triProjected.p[2].y *= 0.5f * (float)h;
-
-		Utils::DrawTriangle(hdc, Pos(triProjected.p[0].x, triProjected.p[0].y)
-			, Pos(triProjected.p[1].x, triProjected.p[1].y)
-			, Pos(triProjected.p[2].x, triProjected.p[2].y)
-		);
+			Utils::DrawTriangle(hdc, Pos(triProjected.p[0].x, triProjected.p[0].y)
+				, Pos(triProjected.p[1].x, triProjected.p[1].y)
+				, Pos(triProjected.p[2].x, triProjected.p[2].y)
+			);
+		}
+		
 
 	}
 	return true;
 }
 
-void olcEngine3D::MultiplyMatrixVector(vec3d& i, vec3d& o, mat4x4& m) {
+void olcEngine3D_2::MultiplyMatrixVector(vec3d& i, vec3d& o, mat4x4& m) {
 	o.x = i.x * m.m[0][0] + i.y * m.m[1][0] + i.z * m.m[2][0] + m.m[3][0];
 	o.y = i.x * m.m[0][1] + i.y * m.m[1][1] + i.z * m.m[2][1] + m.m[3][1];
 	o.z = i.x * m.m[0][2] + i.y * m.m[1][2] + i.z * m.m[2][2] + m.m[3][2];

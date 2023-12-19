@@ -43,9 +43,13 @@ namespace fs = std::filesystem;
 #include "Mesh.h"
 #include "Utils.h"
 #include "Defines.h"
+#include "Enums.h"
+#include "Scene.h"
 
 #include "TimeManager.h"
 #include "InputManager.h"
+#include "SceneManager.h"
 
 #include "olcEngine3D.h"
+#include "olcEngine3d_2.h"
 
