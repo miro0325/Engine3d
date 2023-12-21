@@ -131,6 +131,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -146,8 +147,8 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="InputManager.h" />
-    <ClInclude Include="olcEngine3D.h" />
-    <ClInclude Include="olcEngine3d_2.h" />
+    <ClInclude Include="Model.h" />
+    <ClInclude Include="Cube.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
@@ -162,8 +163,8 @@
     <ClCompile Include="Engine3D.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="InputManager.cpp" />
-    <ClCompile Include="olcEngine3D.cpp" />
-    <ClCompile Include="olcEngine3d_2.cpp" />
+    <ClCompile Include="Model.cpp" />
+    <ClCompile Include="Cube.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="TimeManager.cpp" />

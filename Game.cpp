@@ -32,7 +32,7 @@ void Game::Init(HWND hWnd)
 	//InputManager::GetInstance()->Init(hWnd);
 	GET_SINGLETON(InputManager)->Init(hWnd);
 	//GET_SINGLETON(SceneManager)->Init();
-	//GET_SINGLETON(SceneManager)->ChangeScene(SceneType::Engine3d);
+	//GET_SINGLETON(SceneManager)->ChangeScene(SceneType::Model);
 
 	demo.OnUserCreate();
 

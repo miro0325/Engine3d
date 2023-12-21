@@ -4,5 +4,6 @@
 enum class SceneType
 {
 	None,		// 0
-	Engine3d
+	Cube,
+	Model,
 };

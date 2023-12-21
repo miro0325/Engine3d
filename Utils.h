@@ -18,5 +18,9 @@ public:
 	static void DrawPixel(HDC hdc, Pos pos, int32 color);
 
 	static void DrawTriangle(HDC hdc, Pos pos1, Pos pos2, Pos pos3);
+
+	static void FillTriangle(HDC hdc, Pos pos1, Pos pos2, Pos pos3, COLORREF lineColor, COLORREF brushColor );
+	
+	static vector<string> Split(string input, char dlim);
 };
 

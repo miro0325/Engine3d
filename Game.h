@@ -13,7 +13,7 @@ public:
 private:
 	HWND _hWnd = {};
 	HDC _hdc = {};
-	olcEngine3D_2 demo;
+	Model demo;
 
 private:
 	RECT _rect;

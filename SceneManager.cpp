@@ -35,10 +35,12 @@ void SceneManager::ChangeScene(SceneType sceneType)
 
 	switch (sceneType)
 	{
-	case SceneType::Engine3d:
-		newScene = new olcEngine3D();
+	case SceneType::Model:
+		newScene = new Model();
 		break;
-	
+	case SceneType::Cube:
+		newScene = new Cube();
+		break;
 	}
 	SAFE_DELETE(_scene);
 

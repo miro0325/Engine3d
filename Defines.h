@@ -1,5 +1,7 @@
 #pragma once
 
+#define _SILENCE_CXX17_STRSTREAM_DEPRECATION_WARNINGS
+
 #define PI 3.14159f
 #define TWOPI 6.28318f
 

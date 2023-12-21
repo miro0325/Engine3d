@@ -60,7 +60,7 @@
     <ClInclude Include="TimeManager.h">
       <Filter>02.Managers</Filter>
     </ClInclude>
-    <ClInclude Include="olcEngine3D.h">
+    <ClInclude Include="Model.h">
       <Filter>03.Scene</Filter>
     </ClInclude>
     <ClInclude Include="Utils.h">
@@ -78,7 +78,7 @@
     <ClInclude Include="Enums.h">
       <Filter>99.Headers</Filter>
     </ClInclude>
-    <ClInclude Include="olcEngine3d_2.h">
+    <ClInclude Include="Cube.h">
       <Filter>03.Scene</Filter>
     </ClInclude>
   </ItemGroup>
@@ -95,7 +95,7 @@
     <ClCompile Include="TimeManager.cpp">
       <Filter>02.Managers</Filter>
     </ClCompile>
-    <ClCompile Include="olcEngine3D.cpp">
+    <ClCompile Include="Model.cpp">
       <Filter>03.Scene</Filter>
     </ClCompile>
     <ClCompile Include="Utils.cpp">
@@ -107,7 +107,7 @@
     <ClCompile Include="Scene.cpp">
       <Filter>03.Scene</Filter>
     </ClCompile>
-    <ClCompile Include="olcEngine3d_2.cpp">
+    <ClCompile Include="Cube.cpp">
       <Filter>03.Scene</Filter>
     </ClCompile>
   </ItemGroup>
