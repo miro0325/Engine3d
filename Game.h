@@ -13,7 +13,7 @@ public:
 private:
 	HWND _hWnd = {};
 	HDC _hdc = {};
-	Model demo;
+	Cube demo;
 
 private:
 	RECT _rect;
